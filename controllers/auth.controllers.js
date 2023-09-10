@@ -9,6 +9,7 @@ const loginUsuario = (req, res) => {
   res.send("Usuario Logueado");
 };
 
+console.log(object);
 module.exports = {
   crearUsuario,
   loginUsuario,
