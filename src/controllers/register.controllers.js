@@ -1,4 +1,4 @@
-const accountCreation = (req, res) => {
+const accountCreation = async (req, res) => {
   const {
     firstName,
     lastName,
@@ -9,36 +9,40 @@ const accountCreation = (req, res) => {
     repeatPassword,
   } = req.body;
 
-  if (
-    checkEmptySpacesRegister_P(
-      firstName,
-      lastName,
-      phone,
-      birthday,
-      email,
-      password,
-      repeatPassword
+  try {
+    if (
+      checkEmptySpacesRegister_P(
+        firstName,
+        lastName,
+        phone,
+        birthday,
+        email,
+        password,
+        repeatPassword
+      )
     )
-  )
-    return res.json({ msg: "Todos los campos son obligatorios." });
-  if (/\d/.test(firstName)) return res.json({ msg: "Nombre invalido." });
-  if (firstName.length < 2) return res.json({ msg: "Nombre invalido." });
-  if (/\d/.test(lastName)) return res.json({ msg: "Apellido invalido." });
-  if (lastName.length < 2) return res.json({ msg: "Apellido invalido." });
-  if (/[a-zA-Z]/.test(phone))
-    return res.json({ msg: "Numero de telefono invalido." });
-  if (phone.length < 9 || phone.length > 10)
-    return res.json({ msg: "Numero de telefono invalido." });
-  if (/[a-zA-Z]/.test(birthday))
-    return res.json({ msg: "Numero de cumpleaños invalido." });
-  if (!validateEmail(email))
-    return res.json({ msg: "Formato de E-mail no valido." });
-  if (password.length <= 5) return res.json({ msg: "Contraseña invalida." });
-  if (password !== repeatPassword)
-    return res.json({ msg: "Las contraseña no coinciden" });
-  res.json({
-    msg: "Usuario Registrado ",
-  });
+      return res.json({ msg: "Todos los campos son obligatorios." });
+    if (/\d/.test(firstName)) return res.json({ msg: "Nombre invalido." });
+    if (firstName.length < 2) return res.json({ msg: "Nombre invalido." });
+    if (/\d/.test(lastName)) return res.json({ msg: "Apellido invalido." });
+    if (lastName.length < 2) return res.json({ msg: "Apellido invalido." });
+    if (/[a-zA-Z]/.test(phone))
+      return res.json({ msg: "Numero de telefono invalido." });
+    if (phone.length < 9 || phone.length > 10)
+      return res.json({ msg: "Numero de telefono invalido." });
+    if (/[a-zA-Z]/.test(birthday))
+      return res.json({ msg: "Numero de cumpleaños invalido." });
+    if (!validateEmail(email))
+      return res.json({ msg: "Formato de E-mail no valido." });
+    if (password.length <= 5) return res.json({ msg: "Contraseña invalida." });
+    if (password !== repeatPassword)
+      return res.json({ msg: "Las contraseña no coinciden" });
+    res.json({
+      msg: "Usuario Registrado ",
+    });
+  } catch (error) {
+    console.log("Usuario no registrado");
+  }
 };
 
 function checkEmptySpacesRegister_P(
