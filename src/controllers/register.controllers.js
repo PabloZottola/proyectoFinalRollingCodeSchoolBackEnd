@@ -1,4 +1,10 @@
+const User = require("../model/user-model");
+
 const accountCreation = async (req, res) => {
+  const user = new User(req.body);
+
+  await user.save();
+
   const {
     firstName,
     lastName,
@@ -7,7 +13,36 @@ const accountCreation = async (req, res) => {
     email,
     password,
     repeatPassword,
-  } = req.body;
+  } = user;
+
+  function checkEmptySpacesRegister_P(
+    firstName,
+    lastName,
+    phone,
+    birthday,
+    email,
+    password,
+    repeatPassword
+  ) {
+    if (
+      firstName.trim() === "" ||
+      lastName.trim() === "" ||
+      phone.trim() === "" ||
+      birthday.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === "" ||
+      repeatPassword.trim() === ""
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  function validateEmail(email) {
+    const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const validateEmail = regEx.test(email);
+    return validateEmail;
+  }
 
   try {
     if (
@@ -44,35 +79,6 @@ const accountCreation = async (req, res) => {
     console.log("Usuario no registrado");
   }
 };
-
-function checkEmptySpacesRegister_P(
-  firstName,
-  lastName,
-  phone,
-  birthday,
-  email,
-  password,
-  repeatPassword
-) {
-  if (
-    firstName.trim() === "" ||
-    lastName.trim() === "" ||
-    phone.trim() === "" ||
-    birthday.trim() === "" ||
-    email.trim() === "" ||
-    password.trim() === "" ||
-    repeatPassword.trim() === ""
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-}
-function validateEmail(email) {
-  const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const validateEmail = regEx.test(email);
-  return validateEmail;
-}
 
 module.exports = {
   accountCreation,
