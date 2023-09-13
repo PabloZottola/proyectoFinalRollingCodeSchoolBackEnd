@@ -27,10 +27,6 @@ const userSchema = Schema({
     type: String,
     require: true,
   },
-  repeatPassword: {
-    type: String,
-    require: true,
-  },
   rol: {
     type: String,
     default: "usuario",
