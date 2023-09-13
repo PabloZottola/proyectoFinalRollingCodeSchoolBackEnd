@@ -1,4 +1,5 @@
 const User = require("../model/user-model");
+const bcrypt = require("bcrypt");
 
 async function accountCreation(req, res) {
   const {
@@ -45,6 +46,8 @@ async function accountCreation(req, res) {
       return res.json({ msg: "Las contraseña no coinciden" });
 
     const user = new User(req.body);
+    const salt = bcrypt.genSaltSync(10);
+    user.password = bcrypt.hashSync(password, salt);
     await user.save();
 
     res.json({
