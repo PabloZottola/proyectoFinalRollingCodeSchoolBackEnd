@@ -14,10 +14,6 @@ const userSchema = Schema({
     require: true,
     unique: true,
   },
-  birthday: {
-    type: String,
-    require: true,
-  },
   email: {
     type: String,
     require: true,
@@ -29,7 +25,7 @@ const userSchema = Schema({
   },
   rol: {
     type: String,
-    default: "usuario",
+    default: "Profesor",
   },
 });
 
