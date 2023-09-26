@@ -46,8 +46,9 @@ async function accountCreation(req, res) {
     const payload = {
       email: User.email,
       id: User._id,
+      role: User.role,
     };
-
+    console.log(payload);
     const token = jwt.sign(payload, process.env.SECRET_JWT, {
       expiresIn: "30d",
     });

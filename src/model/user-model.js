@@ -23,7 +23,7 @@ const userSchema = Schema({
     type: String,
     require: true,
   },
-  rol: {
+  role: {
     type: String,
     default: "Profesor",
   },
