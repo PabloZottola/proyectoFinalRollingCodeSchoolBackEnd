@@ -1,5 +1,6 @@
 const express = require("express");
 const { loginUser } = require("../controllers/login.controllers");
+const { validarCampos } = require("../middlewares/validarCampos");
 const { check } = require("express-validator");
 
 const routerLogin = express.Router();
@@ -12,7 +13,7 @@ routerLogin.post(
       .isEmpty()
       .isEmail()
       .isLength({
-        min: 35,
+        mix: 35,
       }),
     check("password", "E-mail o contraseña invalida").not().isEmpty().isLength({
       min: 5,
