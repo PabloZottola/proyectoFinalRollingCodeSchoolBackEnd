@@ -22,8 +22,6 @@ async function studentsCreation(req, res) {
     if (!validateEmail(email))
       return res.status(400).json({ msg: "E-mail no válido." });
 
-    console.log(req.body);
-
     const userStudents = new User(req.body);
     await userStudents.save();
 
