@@ -1,6 +1,6 @@
-const User = require("../model/crearAlumnos-model");
+const User = require("../model/createStudents-model");
 
-async function crearAlumnosCreation(req, res) {
+async function studentsCreation(req, res) {
     const { firstName, lastName, phone, yearOfStudy, email, } =
         req.body;
 
@@ -25,8 +25,8 @@ async function crearAlumnosCreation(req, res) {
             return res.json({ msg: "Numero de telefono inválido." });
 
 
-        const userAlumnos = new userAlumnos(req.body);
-        await userAlumnos.save();
+        const userStudents = new userStudents(req.body);
+        await userStudents.save();
 
         res.json({
             msg: "Alumno registrado ",
@@ -38,5 +38,5 @@ async function crearAlumnosCreation(req, res) {
 
 
 module.exports = {
-    crearAlumnosCreation,
+    studentsCreation,
 };

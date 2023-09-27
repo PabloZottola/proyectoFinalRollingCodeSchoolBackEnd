@@ -28,4 +28,4 @@ const userSchema = Schema({
     },
 });
 
-module.exports = model("userAlumnos", userSchema);
+module.exports = model("userStudents", userSchema);
