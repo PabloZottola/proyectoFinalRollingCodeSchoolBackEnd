@@ -1,7 +1,7 @@
 const express = require("express");
-const { ListAlumnos } = require("../controllers/admin.controller");
+const { ListStudents } = require("../controllers/admin.controller");
 const routerAdmin = express.Router();
 
-routerAdmin.get("", ListAlumnos);
+routerAdmin.get("", ListStudents);
 
 module.exports = routerAdmin;

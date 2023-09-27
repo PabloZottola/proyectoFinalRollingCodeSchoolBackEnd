@@ -1,6 +1,6 @@
-const User = require("../model/user-model");
+const User = require("../model/createStudents-model");
 
-async function ListAlumnos(req, res) {
+async function ListStudents(req, res) {
   try {
     const user = await User.find();
     res.status(201).json({
@@ -15,5 +15,5 @@ async function ListAlumnos(req, res) {
 }
 
 module.exports = {
-  ListAlumnos,
+  ListStudents,
 };
