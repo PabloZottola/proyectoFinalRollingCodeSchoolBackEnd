@@ -9,6 +9,8 @@ dbConnection();
 
 app.use(express.json());
 app.use(cors());
+app.use("/admin", require("./routes/admin"));
+app.use("/auth", require("./routes/login"));
 app.use("/auth", require("./routes/register"));
 app.use("/createstudents", require("./routes/createStudentsRoutes"));
 

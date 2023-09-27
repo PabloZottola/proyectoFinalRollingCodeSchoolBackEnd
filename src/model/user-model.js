@@ -23,10 +23,10 @@ const userSchema = Schema({
     type: String,
     require: true,
   },
-  rol: {
+  role: {
     type: String,
     default: "Profesor",
   },
 });
 
-module.exports = model("userModel", userSchema);
+module.exports = model("profesor", userSchema);

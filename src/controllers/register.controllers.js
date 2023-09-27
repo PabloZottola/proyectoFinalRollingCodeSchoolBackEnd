@@ -1,5 +1,6 @@
 const User = require("../model/user-model");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 async function accountCreation(req, res) {
   const { firstName, lastName, phone, email, password, repeatPassword } =
@@ -16,34 +17,50 @@ async function accountCreation(req, res) {
       email.trim() === "" ||
       password.trim() === ""
     )
-      return res.json({ msg: "Todos los campos son obligatorios." });
-    if (/\d/.test(firstName) || firstName.length < 2)
-      return res.json({ msg: "Nombre invalido." });
-    if (/\d/.test(lastName) || lastName.length < 2)
-      return res.json({ msg: "Apellido invalido." });
+      return res
+        .status(400)
+        .json({ msg: "Todos los campos son obligatorios." });
+    if (/\d/.test(firstName) || firstName.length < 2 || lastName.length > 24)
+      return res.status(400).json({ msg: "Nombre invalido." });
+    if (/\d/.test(lastName) || lastName.length < 2 || lastName.length > 24)
+      return res.status(400).json({ msg: "Apellido invalido." });
     if (
       /[a-zA-Z]/.test(phone) ||
       phone.length < 9 ||
       phone.length > 10 ||
       phoneExist
     )
-      return res.json({ msg: "Numero de telefono invalido." });
-    if (!validateEmail(email) || emailExist)
-      return res.json({ msg: "E-mail no valido." });
+      return res.status(400).json({ msg: "Numero de telefono invalido." });
+    if (!validateEmail(email) || emailExist || email.length > 35)
+      return res.status(400).json({ msg: "E-mail no valido." });
     if (password.length <= 5) return res.json({ msg: "Contraseña invalida." });
     if (password !== repeatPassword)
-      return res.json({ msg: "Las contraseña no coinciden" });
+      return res.status(400).json({ msg: "Las contraseña no coinciden" });
 
     const user = new User(req.body);
     const salt = bcrypt.genSaltSync(10);
     user.password = bcrypt.hashSync(password, salt);
+
     await user.save();
 
-    res.json({
-      msg: "Usuario Registrado ",
+    const payload = {
+      email: User.email,
+      id: User._id,
+      role: User.role,
+    };
+    console.log(payload);
+    const token = jwt.sign(payload, process.env.SECRET_JWT, {
+      expiresIn: "30d",
+    });
+
+    res.status(201).json({
+      msg: "Usuario Registrado",
+      token,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      msg: "Hable con el administrador",
+    });
   }
 }
 function validateEmail(email) {
