@@ -23,6 +23,7 @@ async function accountCreation(req, res) {
       return res.status(400).json({ msg: "Nombre invalido." });
     if (/\d/.test(lastName) || lastName.length < 2 || lastName.length > 24)
       return res.status(400).json({ msg: "Apellido invalido." });
+
     if (
       /[a-zA-Z]/.test(phone) ||
       phone.length < 9 ||

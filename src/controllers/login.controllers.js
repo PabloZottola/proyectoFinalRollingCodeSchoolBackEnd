@@ -6,13 +6,13 @@ async function loginUser(req, res) {
   try {
     const { email, password } = req.body;
     const userExist = await User.findOne({ email });
-    const passwordExist = bcrypt.compareSync(password, userExist.password);
     if (email.trim() === "" || password.trim() === "")
       return res
         .status(400)
         .json({ msg: "Todos los campos son obligatorios." });
-    if (!userExist)
-      return res.status(400).json({ msg: "E-mail o contraseña invalida." });
+    if (userExist === null)
+      return res.status(400).json({ msg: "E-mail o contraseña inválida." });
+    const passwordExist = bcrypt.compareSync(password, userExist.password);
     if (!passwordExist)
       return res.status(400).json({ msg: "E-mail o contraseña invalida" });
 
@@ -21,7 +21,6 @@ async function loginUser(req, res) {
       id: userExist._id,
       role: userExist.role,
     };
-    console.log(payload);
     const token = jwt.sign(payload, process.env.SECRET_JWT, {
       expiresIn: "30d",
     });
