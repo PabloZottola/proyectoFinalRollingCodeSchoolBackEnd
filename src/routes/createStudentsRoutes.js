@@ -5,11 +5,13 @@ const { check } = require("express-validator");
 const {
   studentsCreation,
 } = require("../controllers/createStudents.controller");
+const { validarJWT } = require("../middlewares/validarJWT");
 const routerStudentsCreation = express.Router();
 
 routerStudentsCreation.post(
   "",
   [
+    validarJWT,
     check("firstName", "Nombre invalido.").not().isEmpty().isLength({
       min: 2,
       max: 24,

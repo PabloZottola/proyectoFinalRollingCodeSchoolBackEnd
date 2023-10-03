@@ -22,6 +22,10 @@ const userSchema = Schema({
     require: true,
     unique: true,
   },
+  Notes: {
+    type: String,
+    default: "",
+  },
   rol: {
     type: String,
     default: "Alumno",
