@@ -13,6 +13,8 @@ app.use("/admin", require("./routes/admin"));
 app.use("/auth", require("./routes/login"));
 app.use("/auth", require("./routes/register"));
 app.use("/createstudents", require("./routes/createStudentsRoutes"));
+app.use("/contact", require("./routes/contactFormSend"));
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Servidor en el puerto ${process.env.PORT}`);
