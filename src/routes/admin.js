@@ -3,11 +3,11 @@ const { validarJWT } = require("../middlewares/validarJWT");
 const {
   ListStudents,
   ListTeacher,
-  NoteStudent,
+  EditListStudent,
 } = require("../controllers/admin.controller");
 const routerAdmin = express.Router();
 
 routerAdmin.get("/students", validarJWT, ListStudents);
 routerAdmin.get("/teacher", validarJWT, ListTeacher);
-routerAdmin.put("/notes", validarJWT, NoteStudent);
+routerAdmin.put("/editstudents", validarJWT, EditListStudent);
 module.exports = routerAdmin;

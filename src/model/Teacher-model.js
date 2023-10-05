@@ -10,26 +10,23 @@ const userSchema = Schema({
     require: true,
   },
   phone: {
-    type: String,
+    type: Number,
     require: true,
-  },
-  yearOfStudy: {
-    type: String,
-    require: true,
+    unique: true,
   },
   email: {
     type: String,
     require: true,
     unique: true,
   },
-  Notes: {
+  password: {
     type: String,
-    default: "",
+    require: true,
   },
-  rol: {
+  role: {
     type: String,
-    default: "Alumno",
+    default: "Profesor",
   },
 });
 
-module.exports = model("userStudents", userSchema);
+module.exports = model("Teacher", userSchema);

@@ -1,9 +1,10 @@
-const Students = require("../model/createStudents-model");
-const Teacher = require("../model/user-model");
+const Teacher = require("../model/Teacher-model");
+const Student = require("../model/Students-model");
 
 async function ListStudents(req, res) {
   try {
-    const students = await Students.find();
+    const students = await Student.find();
+    console.log(students);
     res.status(201).json({
       msg: "Alumnos enviados",
       students,
@@ -14,17 +15,18 @@ async function ListStudents(req, res) {
     });
   }
 }
-async function NoteStudent(req, res) {
+async function EditListStudent(req, res) {
   try {
-    const students = await Students.find(req.body._id);
+    const students = await Student.findById(req.body._id);
+    console.log(students);
     if (!students) {
       return res.status(400).json({
-        msg: "no existe un producto con este ID para editar",
+        msg: "No existe un alumno con este ID para editar",
       });
     }
-    await Students.findByIdAndUpdate(req.body._id, req.body);
+    await Student.findByIdAndUpdate(students, req.body);
     res.status(200).json({
-      msg: "producto Editado",
+      msg: "Alumno editado",
     });
   } catch (error) {
     res.status(500).json({
@@ -49,5 +51,5 @@ async function ListTeacher(req, res) {
 module.exports = {
   ListStudents,
   ListTeacher,
-  NoteStudent,
+  EditListStudent,
 };

@@ -1,4 +1,4 @@
-const User = require("../model/createStudents-model");
+const Students = require("../model/Students-model");
 
 async function studentsCreation(req, res) {
   const { firstName, lastName, phone, yearOfStudy, email } = req.body;
@@ -22,7 +22,7 @@ async function studentsCreation(req, res) {
     if (!validateEmail(email))
       return res.status(400).json({ msg: "E-mail no válido." });
 
-    const userStudents = new User(req.body);
+    const userStudents = new Students(req.body);
     await userStudents.save();
 
     res.status(201).json({

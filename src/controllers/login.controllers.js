@@ -1,11 +1,11 @@
-const User = require("../model/user-model");
+const Teacher = require("../model/Teacher-model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 async function loginUser(req, res) {
   try {
     const { email, password } = req.body;
-    const userExist = await User.findOne({ email });
+    const userExist = await Teacher.findOne({ email });
     if (email.trim() === "" || password.trim() === "")
       return res
         .status(400)

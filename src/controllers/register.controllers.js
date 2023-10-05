@@ -1,4 +1,4 @@
-const User = require("../model/user-model");
+const Teacher = require("../model/Teacher-model");
 const bcrypt = require("bcrypt");
 
 async function accountCreation(req, res) {
@@ -6,8 +6,8 @@ async function accountCreation(req, res) {
     req.body;
 
   try {
-    const emailExist = await User.findOne({ email });
-    const phoneExist = await User.findOne({ phone });
+    const emailExist = await Teacher.findOne({ email });
+    const phoneExist = await Teacher.findOne({ phone });
 
     if (
       firstName.trim() === "" ||
@@ -37,11 +37,11 @@ async function accountCreation(req, res) {
     if (password !== repeatPassword)
       return res.status(400).json({ msg: "Las contraseña no coinciden" });
 
-    const user = new User(req.body);
+    const teacher = new Teacher(req.body);
     const salt = bcrypt.genSaltSync(10);
-    user.password = bcrypt.hashSync(password, salt);
+    teacher.password = bcrypt.hashSync(password, salt);
 
-    await user.save();
+    await teacher.save();
 
     res.status(201).json({
       msg: "Profesor Registrado",
