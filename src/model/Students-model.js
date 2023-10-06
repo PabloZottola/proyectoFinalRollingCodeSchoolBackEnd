@@ -28,7 +28,11 @@ const userSchema = Schema({
   },
   monthlyFees: {
     type: String,
-    default: "",
+    default: "00-00",
+  },
+  BlockedStudent: {
+    type: Boolean,
+    default: true,
   },
   rol: {
     type: String,
