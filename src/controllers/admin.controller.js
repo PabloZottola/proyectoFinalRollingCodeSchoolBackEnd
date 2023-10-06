@@ -4,7 +4,6 @@ const Student = require("../model/Students-model");
 async function ListStudents(req, res) {
   try {
     const students = await Student.find();
-    console.log(students);
     res.status(201).json({
       msg: "Alumnos enviados",
       students,
@@ -18,7 +17,6 @@ async function ListStudents(req, res) {
 async function EditListStudent(req, res) {
   try {
     const students = await Student.findById(req.body._id);
-    console.log(students);
     if (!students) {
       return res.status(400).json({
         msg: "No existe un alumno con este ID para editar",
