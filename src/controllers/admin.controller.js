@@ -22,7 +22,27 @@ async function EditListStudent(req, res) {
         msg: "No existe un alumno con este ID para editar",
       });
     }
+    console.log(req);
     await Student.findByIdAndUpdate(students, req.body);
+    res.status(200).json({
+      msg: "Alumno editado",
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: "Hable con el administrador",
+    });
+  }
+}
+async function EditStudentNote(req, res) {
+  try {
+    const student = await Student.findById(req.body._id);
+    if (!student) {
+      return res.status(400).json({
+        msg: "No existe un alumno con este ID para editar",
+      });
+    }
+    console.log(req.body.editedNotes);
+    await Student.findByIdAndUpdate(student, { Notes: req.body.editedNotes });
     res.status(200).json({
       msg: "Alumno editado",
     });
@@ -50,4 +70,5 @@ module.exports = {
   ListStudents,
   ListTeacher,
   EditListStudent,
+  EditStudentNote,
 };
