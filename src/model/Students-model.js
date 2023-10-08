@@ -14,7 +14,7 @@ const userSchema = Schema({
     require: true,
   },
   yearOfStudy: {
-    type: Number,
+    type: String,
     require: true,
   },
   email: {
