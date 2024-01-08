@@ -5,6 +5,7 @@ const {
   ListTeacher,
   EditListStudent,
   EditStudentNote,
+  DeleteListStudent,
 } = require("../controllers/admin.controller");
 const routerAdmin = express.Router();
 
@@ -12,4 +13,5 @@ routerAdmin.get("/students", validarJWT, ListStudents);
 routerAdmin.get("/teacher", validarJWT, ListTeacher);
 routerAdmin.put("/editstudents", validarJWT, EditListStudent);
 routerAdmin.put("/editstudentsnote", validarJWT, EditStudentNote);
+routerAdmin.put("/deletestudents", validarJWT, DeleteListStudent);
 module.exports = routerAdmin;
