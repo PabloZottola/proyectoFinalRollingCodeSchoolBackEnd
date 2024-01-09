@@ -65,14 +65,15 @@ async function EditStudentNote(req, res) {
 }
 async function DeleteListStudent(req, res) {
   try {
-    const studentId = req.body._id;
-    const students = await Student.findById(studentId);
+    console.log(req);
+    const students = await Student.findById(req.body._id);
+    console.log(students);
     if (!students) {
       return res.status(400).json({
         msg: "No existe un alumno con este ID para borrar",
       });
     }
-    await Student.findByIdAndDelete(studentId);
+    await Student.findByIdAndDelete(students, req.body);
     res.status(200).json({
       msg: "Alumno borrado",
     });
