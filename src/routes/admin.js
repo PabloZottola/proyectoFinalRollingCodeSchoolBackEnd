@@ -13,5 +13,5 @@ routerAdmin.get("/students", validarJWT, ListStudents);
 routerAdmin.get("/teacher", validarJWT, ListTeacher);
 routerAdmin.put("/editstudents", validarJWT, EditListStudent);
 routerAdmin.put("/editstudentsnote", validarJWT, EditStudentNote);
-routerAdmin.delete("/deletestudents", validarJWT, DeleteListStudent);
+routerAdmin.delete("/deletestudents/:id", validarJWT, DeleteListStudent);
 module.exports = routerAdmin;
