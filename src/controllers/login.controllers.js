@@ -28,6 +28,7 @@ async function loginUser(req, res) {
     res.status(201).json({
       msg: "Usuario Logueado",
       token,
+      userExist,
     });
   } catch (error) {
     res.status(500).json({
